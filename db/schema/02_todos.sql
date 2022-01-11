@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS todos CASCADE;
+CREATE TABLE todos (
+  id SERIAL PRIMARY KEY NOT NULL,
+  memo VARCHAR(255) NOT NULL,
+  memo_type VARCHAR(255) NOT NULL,
+  timestamp VARCHAR(255) NOT NULL,
+  user_id int REFERENCES users(id)
+);
