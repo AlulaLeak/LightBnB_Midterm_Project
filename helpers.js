@@ -53,6 +53,8 @@ function categorizeAndInsertNewTodo(text, userID){
     db.query(queryToReturnAllMemosAndTypes)
     .then((res) => {
 
+
+        //console.log(res.rows)
         const memoAndTypeArray = res.rows
 
         for (const set of memoAndTypeArray) {
@@ -60,6 +62,7 @@ function categorizeAndInsertNewTodo(text, userID){
         }
         // Train
     classifier.train();
+
 
     const type = classifier.classify(text)
     const today = new Date();
@@ -76,7 +79,6 @@ function categorizeAndInsertNewTodo(text, userID){
 
     db.query(queryToInsertTodo, values)
     .then((res) => {
-        console.log(res)
     })
     .catch(err => console.error(err))
 
@@ -84,7 +86,7 @@ function categorizeAndInsertNewTodo(text, userID){
     .catch(err => console.error(err))
 
 }
-// categorizeAndInsertNewTodo("get new earrings", 2)
+//categorizeAndInsertNewTodo("get new earrings", 2)
 
 
 
@@ -93,14 +95,14 @@ function categorizeAndInsertNewTodo(text, userID){
 function sortListOfTodosByCategory(userID, category){
 
     const values = [userID, category]
-    const queryToReturnTodosAndTypes = `
+    const queryToReturnTodosBasedOnType = `
     SELECT memo, memo_type
     FROM todos
     JOIN users ON user_id = users.id
     WHERE (user_id = $1 AND memo_type = $2)
     ORDER BY timestamp;
     `
-    db.query(queryToReturnTodosAndTypes, values)
+    db.query(queryToReturnTodosBasedOnType, values)
     .then((res) => {
 
         const memoRows = res.rows // <---- Array of every memo and memo_type
@@ -115,8 +117,7 @@ function sortListOfTodosByCategory(userID, category){
     .catch(err => console.error(err))
 
 }
-// sortListOfTodosByCategory(2, "To Watch")
-
+sortListOfTodosByCategory(2, "To Eat")
 
 
 
@@ -124,4 +125,3 @@ function sortListOfTodosByCategory(userID, category){
 function createMemoElement(todo){
     return `<li>${todo.memo}</li>`
 }
-
