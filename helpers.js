@@ -41,7 +41,7 @@ function addUser(name, email, password, profile_picture){ // Need a default to b
 
 
 // TEST FUNCTION FOR ADD USER
-// addUser('Jamal Flat', 'jamalllllly@mail.com', '123', 'http://fakepic.png') // <-- pic needs default
+//addUser('Jamallllllllllllllllllll Flat', 'jamalllllly@mail.com', '123', 'http://fakepic.png') // <-- pic needs default
 
 function categorizeAndInsertNewTodo(text, userID){
 
@@ -60,7 +60,7 @@ function categorizeAndInsertNewTodo(text, userID){
         for (const set of memoAndTypeArray) {
             classifier.addDocument(set.memo, set.memo_type);
         }
-        // Train
+        // Train classifier.addDocument("eat spaghetti", "To Watch")
     classifier.train();
 
 
@@ -86,17 +86,17 @@ function categorizeAndInsertNewTodo(text, userID){
     .catch(err => console.error(err))
 
 }
-//categorizeAndInsertNewTodo("get new earrings", 2)
+// categorizeAndInsertNewTodo("000000000000000", 2)
 
 
 
 
 
-function sortListOfTodosByCategory(userID, category){
+function sortListOfTodosByCategoryAndId(userID, category){
 
     const values = [userID, category]
     const queryToReturnTodosBasedOnType = `
-    SELECT memo, memo_type
+    SELECT memo, memo_type, timestamp
     FROM todos
     JOIN users ON user_id = users.id
     WHERE (user_id = $1 AND memo_type = $2)
@@ -112,16 +112,79 @@ function sortListOfTodosByCategory(userID, category){
             memoList.push(createMemoElement(memoSet))
         }
         memoList = memoList.join('\n');
-        console.log(memoList)
+        return memoList
     })
     .catch(err => console.error(err))
 
 }
-sortListOfTodosByCategory(2, "To Eat")
+//sortListOfTodosByCategory(2, "To Eat")
 
+function sortListOfTodosById(userID){
 
+    const values = [userID]
+    const queryToReturnTodosBasedOnType = `
+    SELECT memo, memo_type, timestamp
+    FROM todos
+    JOIN users ON user_id = users.id
+    WHERE user_id = $1
+    ORDER BY timestamp;
+    `
+    db.query(queryToReturnTodosBasedOnType, values)
+    .then((res) => {
+
+        const memoRows = res.rows // <---- Array of every memo and memo_type
+        let memoList = []
+
+        for (const memoSet of memoRows) {
+            memoList.push(createMemoElement(memoSet))
+        }
+        memoList = memoList.join('\n');
+        return memoList
+    })
+    .catch(err => console.error(err))
+
+}
+
+//sortListOfTodosById(2)
 
 
 function createMemoElement(todo){
-    return `<li>${todo.memo}</li>`
+    return `
+                <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
+              <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
+                <div class="form-check">
+                  <input
+                    class="form-check-input me-0"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckChecked1"
+                    aria-label="..."
+                    checked
+                  />
+                </div>
+              </li>
+              <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                <p class="lead fw-normal mb-0">${todo.memo}</p>
+              </li>
+              <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
+                <div class="d-flex flex-row justify-content-end mb-1">
+                  <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
+                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
+                </div>
+                <div class="text-end text-muted">
+                  <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                    <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>${todo.timestamp}</p></a>
+                </div>
+              </li>
+            </ul>
+    `
+}
+
+
+
+module.exports = {
+    addUser,
+    categorizeAndInsertNewTodo,
+    sortListOfTodosByCategoryAndId,
+    sortListOfTodosById
 }
