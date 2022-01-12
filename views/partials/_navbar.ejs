@@ -1,0 +1,23 @@
+    <!--For when user is IS logged in-->
+
+<nav class="navbar nav-light justify-content-start ">
+
+  <div class="d-flex align-self-center">
+    <h1 class="p-2"> Smart TODO List</h1>
+  </div>
+  <% if (userId) { %>
+    <form class="d-flex ml-auto p-2">
+      <span class="login-hello align-self-center p-2"><b>Hello <%= userId %>!</b></span>
+      <div class="btn btn-outline-secondary align-self-center profile-toggle" style="cursor: pointer">Change Password</div>
+    </form>
+    <form class="" action="api/logout" method='POST'>
+      <button class="btn btn-outline-secondary p-2" value="Logout" type='submit'>Logout</button>
+    </form>
+    <!--For when user is NOT logged in-->
+  <% } else { %>
+    <form class="d-flex ml-auto p-2">
+      <div class="register-toggle btn btn-outline-secondary p-2" style='cursor: pointer'>Register</div>
+      <div class="login-toggle btn btn-outline-secondary p-2" style='cursor: pointer'>Login</div>
+    </form>
+  <% } %>
+</nav>
