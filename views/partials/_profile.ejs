@@ -16,8 +16,7 @@
 <!-- JQuery -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="module" src="/scripts/app.js"></script>
-<!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+<script type="text/javascript" src="/scripts/app.js"></script>
 
 
 
@@ -37,10 +36,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-row align-items-center">
-                    <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
-                    <div>
-                      <button type="button" class="btn btn-primary">Add</button>
-                    </div>
+                    <form action="/profile" method="POST">
+                      <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
+                      <div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

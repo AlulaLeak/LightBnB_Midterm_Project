@@ -9,6 +9,12 @@ const express = require('express');
 const router  = express.Router();
 const app = express()
 
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
+// // in latest body-parser use like below.
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
 
@@ -22,10 +28,9 @@ module.exports = (db) => {
 
     res.render('../views/partials/_profile.ejs', templateVars)
   });
-  router.post("/push", (req, res) => {
+  router.post("/", (req, response) => {
       
-
-    // This is where we need to set a cookie
+    console.log('this is the body:', req.body)
 
   })
   return router;
