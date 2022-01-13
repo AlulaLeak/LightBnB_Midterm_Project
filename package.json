@@ -12,6 +12,7 @@
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "chalk": "^2.4.2",
     "date-fns": "^2.28.0",
     "dotenv": "^2.0.0",

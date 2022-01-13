@@ -57,7 +57,7 @@ app.use("/api/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/profile", profileRoutes(db));
-
+app.use("/", profileRoutes(db));
 
 
 
