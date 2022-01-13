@@ -6,6 +6,7 @@
  */
 
 const express = require('express');
+const res = require('express/lib/response');
 const router  = express.Router();
 const app = express()
 
@@ -30,8 +31,9 @@ module.exports = (db) => {
   });
   router.post("/", (req, response) => {
       
-    console.log('this is the body:', req.body)
+    const data = typeof (req.body)
 
+    console.log(data)
   })
   return router;
 };
