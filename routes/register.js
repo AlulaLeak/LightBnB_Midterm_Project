@@ -23,10 +23,11 @@ module.exports = (db) => {
     res.render('../views/partials/_register.ejs', templateVars)
   });
   router.post("/push", (req, res) => {
-      
+
 
     // This is where we need to set a cookie
 
   })
   return router;
 };
+
