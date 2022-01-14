@@ -41,6 +41,7 @@ const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const profileRoutes = require("./routes/profile");
 const todoRoutes = require("./routes/todos")
+const accountRoutes = require("./routes/account");
 
 
 
@@ -52,6 +53,7 @@ app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/profile", profileRoutes(db));
 app.use("/api/todos", todoRoutes(db));
+app.use("/account", accountRoutes(db));
 
 
 
