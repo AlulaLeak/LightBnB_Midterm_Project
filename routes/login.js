@@ -22,8 +22,9 @@ module.exports = (db) => {
 
     res.render('../views/partials/_login.ejs', templateVars)
   });
-  router.post("/push", (req, res) => {
+  router.post("/", (req, res) => {
       
+    console.log(req.body)
 
     // This is where we need to set a cookie
 
