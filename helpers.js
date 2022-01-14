@@ -43,6 +43,16 @@ function addUser(name, email, password, profile_picture){ // Need a default to b
 // TEST FUNCTION FOR ADD USER
 //addUser('Jamallllllllllllllllllll Flat', 'jamalllllly@mail.com', '123', 'http://fakepic.png') // <-- pic needs default
 
+
+
+
+
+
+
+
+  // FUNCTION TO CREATE LIST
+
+
 function categorizeAndInsertNewTodo(text, userID){
 
     const queryToReturnAllMemosAndTypes = `
@@ -129,6 +139,7 @@ function sortListOfTodosById(userID){
     WHERE user_id = $1
     ORDER BY timestamp;
     `
+    
     db.query(queryToReturnTodosBasedOnType, values)
     .then((res) => {
 

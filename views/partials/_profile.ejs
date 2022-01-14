@@ -7,7 +7,7 @@
 <link
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
   rel="stylesheet"
-/>`
+/>
 <!-- MDB -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
@@ -17,134 +17,112 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/scripts/app.js"></script>
+<script type="text/javascript" src="/scripts/loadTodos.js"></script>
+<script type="text/javascript" src="/scripts/loadAfterInsert.js"></script>
 
 <!-- local styles -->
-<link rel="stylesheet" href='../../styles/list.css' />
+<link rel="stylesheet" href="../../styles/list.css" />
 
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
-        <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
+        <div
+          class="card"
+          id="list1"
+          style="border-radius: 0.75rem; background-color: #eff1f2"
+        >
           <div class="card-body py-4 px-4 px-md-5">
-
             <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
               <i class="fas fa-check-square me-1"></i>
               <u>My Todo-s</u>
             </p>
-
             <div class="pb-2">
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-row align-items-center">
-                    <form action="/profile" method="POST">
-                      <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
+                    <form id="new-todo" action="/profile" method="POST">
+                      <input
+                        name="memo"
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="FormControlInput1"
+                        placeholder="Add new..."
+                      />
                       <div>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">
+                          Add
+                        </button>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
-
-            <hr class="my-4">
-
-            <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
+            <hr class="my-4" />
+            <div
+              class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3"
+            >
               <p class="small mb-0 me-2 text-muted">Filter</p>
-              <select class="select">
-                <option value="all">All</option>
-                <option value="to-go">To Go</option>
-                <option value="to-buy">To Buy</option>
-                <option value="to-eat">To Eat</option>
-                <option value="to-watch">To Watch</option>
-              </select>
-             
-              <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i class="fas fa-sort-amount-down-alt ms-2"></i></a>
+              <form
+                name="memo-type"
+                value="all"
+                id="type-all"
+                action="/loadtodos"
+                method="POST"
+                class="submit-type"
+              >
+                <button type="submit">All</button>
+              </form>
+              <form
+                name="memo-type-read"
+                id="type-read"
+                action="/loadtodos"
+                method="POST"
+                class="submit-type"
+                value="toread"
+              >
+                <button type="submit">To Read</button>
+              </form>
+              <form
+                name="memo-type-buy"
+                id="type-buy"
+                action="/loadtodos"
+                method="POST"
+                class="submit-type"
+                value="tobuy"
+              >
+                <button type="submit" value="tobuy">To Buy</button>
+              </form>
+              <form
+                name="memo-type-eat"
+                id="type-eat"
+                action="/loadtodos"
+                method="POST"
+                class="submit-type"
+                value="toeat"
+              >
+                <button type="submit" value="toeat">To Eat</button>
+              </form>
+              <form
+                name="memo-type-watch"
+                id="type-watch"
+                action="/loadtodos"
+                method="POST"
+                class="submit-type"
+                value="towatch"
+              >
+                <button type="submit" value="towatch">To Watch</button>
+              </form>
+              <a
+                href="#!"
+                style="color: #23af89"
+                data-mdb-toggle="tooltip"
+                title="Ascending"
+                ><i class="fas fa-sort-amount-down-alt ms-2"></i
+              ></a>
             </div>
-            <div id="todo-list">
-
-            </div>
-            <!-- <ul class="list-group list-group-horizontal rounded-0 bg-transparent">
-              <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <div class="form-check">
-                  <input
-                    class="form-check-input me-0"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckChecked1"
-                    aria-label="..."
-                    checked
-                  />
-                </div>
-              </li>
-              <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                <p class="lead fw-normal mb-0">Buy groceries for next week</p>
-              </li>
-              <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                <div class="d-flex flex-row justify-content-end mb-1">
-                  <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
-                </div>
-                <div class="text-end text-muted">
-                  <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                    <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p></a>
-                </div>
-              </li>
-            </ul> -->
-            <ul class="list-group list-group-horizontal rounded-0">
-              <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <div class="form-check">
-                  <input
-                    class="form-check-input me-0"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckChecked2"
-                    aria-label="..."
-                  />
-                </div>
-              </li>
-              <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                <p class="lead fw-normal mb-0">Renew car insurance</p>
-              </li>
-
-              <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                <div class="d-flex flex-row justify-content-end mb-1">
-                  <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
-                </div>
-                <div class="text-end text-muted">
-                  <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                    <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p></a>
-                </div>
-              </li>
-            </ul>
-            <ul class="list-group list-group-horizontal rounded-0 mb-2">
-              <li class="list-group-item d-flex align-items-center ps-0 pe-3 py-1 rounded-0 border-0 bg-transparent">
-                <div class="form-check">
-                  <input
-                    class="form-check-input me-0"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckChecked3"
-                    aria-label="..."
-                  />
-                </div>
-              </li>
-              <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
-                <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">Sign up for online course</p>
-              </li>
-              <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
-                <div class="d-flex flex-row justify-content-end mb-1">
-                  <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
-                </div>
-                <div class="text-end text-muted">
-                  <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
-                    <p class="small mb-0"><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p></a>
-                </div>
-              </li>
-            </ul>
-
+            <div id="todo-list"></div>
           </div>
         </div>
       </div>

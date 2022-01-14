@@ -31,16 +31,16 @@
             <p class="h1 text-center mt-3 mb-4 pb-3 text-primary">
               <u>Login</u>
             </p>
-            <form>
+            <form id='user-login'action="/login" method="POST">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="email" class="form-control form-control-lg" />
+                    <input name='email' type="text" id="email" class="form-control form-control-lg" />
                     <label class="form-label" for="email">Email</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="password" class="form-control form-control-lg" />
+                    <input name='password' type="text" id="password" class="form-control form-control-lg" />
                     <label class="form-label" for="password">Password</label>
                   </div>
                 </div>
