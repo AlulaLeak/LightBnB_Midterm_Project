@@ -47,6 +47,7 @@ const usersRoutes = require("./routes/users");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const profileRoutes = require("./routes/profile");
+const accountRoutes = require("./routes/account");
 
 
 
@@ -57,7 +58,8 @@ app.use("/api/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/profile", profileRoutes(db));
-app.use("/", profileRoutes(db));
+app.use("/account", accountRoutes(db));
+
 
 
 
