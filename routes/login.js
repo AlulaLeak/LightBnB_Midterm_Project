@@ -24,6 +24,9 @@ module.exports = (db) => {
 
     res.render('../views/partials/_login.ejs', templateVars)
   });
+  router.post("/", (req, res) => {
+      
+    console.log(req.body)
   router.post("/push", (req, res) => {
 
 

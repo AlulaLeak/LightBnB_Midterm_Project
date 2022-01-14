@@ -8,13 +8,6 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
-// Load body-parser
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
-// in latest body-parser use like below.
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -47,6 +40,7 @@ const usersRoutes = require("./routes/users");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const profileRoutes = require("./routes/profile");
+const todoRoutes = require("./routes/todos")
 const accountRoutes = require("./routes/account");
 
 
@@ -58,6 +52,7 @@ app.use("/api/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/register", registerRoutes(db));
 app.use("/profile", profileRoutes(db));
+app.use("/api/todos", todoRoutes(db));
 app.use("/account", accountRoutes(db));
 
 
@@ -76,3 +71,13 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+app.post('/loadtodos', (req, res) => {
+
+  const templateVars = {
+    userId: 2
+}
+
+  res.redirect('/profile')
+
+})
