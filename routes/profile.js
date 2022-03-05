@@ -5,62 +5,51 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const res = require('express/lib/response');
-const router  = express.Router();
-const app = express()
-
-
-
+const express = require("express");
+const res = require("express/lib/response");
+const router = express.Router();
+const app = express();
 
 // NATURAL LANGUAGE
-const natural = require('natural');
+const natural = require("natural");
 const classifier = new natural.BayesClassifier();
 
-
-
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const { categorizeAndInsertNewTodo } = require('../helpers.js');
-const { response } = require('express');
+const { categorizeAndInsertNewTodo } = require("../helpers.js");
+const { response } = require("express");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log("This is the 'profile/' get req.body: ", req.body);
 
-    console.log(req.body)
-    
     const templateVars = {
-        userId: 2
-    }
+      userId: 2,
+    };
 
     if (!templateVars.userId) {
-        res.redirect('../login')
+      res.redirect("../login");
     }
 
-    res.render('../views/partials/_profile.ejs', templateVars)
-
+    res.render("../views/partials/_profile.ejs", templateVars);
   });
   router.post("/", (req, response) => {
+    response.redirect("/profile");
 
+    categorizeAndInsertNewTodo(req.body.memo, 2);
 
-    response.send('done')    
+    const data = req.body;
 
-    categorizeAndInsertNewTodo(req.body.memo, 2)
-
-    const data = req.body
-    
-    console.log(data)
+    // console.log("This is the 'profile/' post req.body: ", req.body);
 
     const templateVars = {
-      userId: 2
-  }
-    
-  })
-
+      userId: 2,
+    };
+  });
 
   return router;
 };

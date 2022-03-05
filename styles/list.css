@@ -12,3 +12,8 @@
   background-color: #fbfbfb;
 }
 /*# sourceMappingURL=list.css.map */
+
+.header {
+  border-bottom: #fbfbfb;
+  max-width: 90%;
+}
