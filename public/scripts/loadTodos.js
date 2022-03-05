@@ -3,7 +3,7 @@ $(function () {
     url: `/api/todos/all`,
     type: "GET",
     success: function (memoRows) {
-      console.log(memoRows);
+      console.log("These are the memoRows", memoRows);
 
       function createMemoElement(todo) {
         return `
@@ -67,9 +67,11 @@ $(function () {
     },
   });
   $(".submit-type").submit(function (e) {
-
-    e.preventDefault() 
-    console.log(e.currentTarget.attributes.value.nodeValue);
+    e.preventDefault();
+    console.log(
+      "These are the e.currentTarget... from the submition:",
+      e.currentTarget.attributes.value.nodeValue
+    );
 
     const endPoint = e.currentTarget.attributes.value.nodeValue;
 
@@ -77,7 +79,7 @@ $(function () {
       url: `/api/todos/${endPoint}`,
       type: "GET",
       success: function (memoRows) {
-        console.log(memoRows);
+        console.log("These are the memoRows in the ajax rewuest: ", memoRows);
 
         function createMemoElement(todo) {
           return `
@@ -120,9 +122,9 @@ $(function () {
 
         $("#todo-list").empty().append(memoList).stop();
 
-        $('body').on('DOMNodeInserted', 'table', function() {
-          $('td:visible').translate('es', 'en');
-      });
+        $("body").on("DOMNodeInserted", "table", function () {
+          $("td:visible").translate("es", "en");
+        });
       },
       error: function (xhr, exception) {
         var msg = "";

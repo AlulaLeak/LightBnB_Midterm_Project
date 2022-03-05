@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+
 const express = require('express');
 const router  = express.Router();
 const app = express()
@@ -13,26 +14,25 @@ const salt = bcrypt.genSaltSync(10);
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-
     const templateVars = {
-        userId: null
-    }
+      userId: null,
+    };
 
     if (templateVars.userId) {
-        res.redirect('../')
+      res.redirect("../");
     }
 
-    res.render('../views/partials/_login.ejs', templateVars)
+    res.render("../views/partials/_login.ejs", templateVars);
   });
   router.post("/", (req, res) => {
-      
-    console.log(req.body)
+    console.log("This is the '/' post req.body: ", req.body);
+  }
+
   router.post("/push", (req, res) => {
 
 
     // This is where we need to set a cookie
-
-  })
+  });
   return router;
 };
 
@@ -84,3 +84,4 @@ app.post('/', (req, res) => {
   req.session.user_id = userID
   res.redirect('../')
 })
+
