@@ -6,28 +6,29 @@
  */
 
 const express = require('express');
+const res = require('express/lib/response');
 const router  = express.Router();
 const app = express()
+
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
 
     const templateVars = {
-        userId: null
+        userId: 2
     }
 
-    if (templateVars.userId) {
-        res.redirect('../')
+    if (!templateVars.userId) {
+        res.redirect('../login')
     }
 
-    res.render('../views/partials/_register.ejs', templateVars)
+    res.render('../views/partials/_account.ejs', templateVars)
   });
-  router.post("/push", (req, res) => {
+  router.post("/", (req, response) => {
+      
+    const data = typeof (req.body)
 
-
-    // This is where we need to set a cookie
-
+    console.log(data)
   })
   return router;
 };
-
